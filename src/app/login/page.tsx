@@ -18,16 +18,38 @@ export default function LoginPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!form.email || !form.password) {
+        const { email, password } = form;
+        if (!email || !password) {
             setError("Please fill in all fields.");
             return;
         }
         setLoading(true);
         try {
-            await signInWithEmailAndPassword(auth, form.email, form.password);
-            router.push("/dashboard");
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            if (user.emailVerified) {
+                router.push("/dashboard");
+            } else {
+                setError("Please verify your email before logging in.");
+            }
         } catch (err: any) {
-            setError(err.message || "Login failed.");
+            console.error(err.code, err.message);
+            switch (err.code) {
+                case "auth/invalid-email":
+                    setError("Invalid email address.");
+                    break;
+                case "auth/user-not-found":
+                    setError("No user found with this email.");
+                    break;
+                case "auth/wrong-password":
+                    setError("Incorrect password.");
+                    break;
+                case "auth/too-many-requests":
+                    setError("Too many attempts. Try again later.");
+                    break;
+                default:
+                    setError("Login failed. " + err.message);
+            }
         } finally {
             setLoading(false);
         }
@@ -36,7 +58,6 @@ export default function LoginPage() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
             <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 space-y-6">
-               
                 <h2 className="text-2xl font-bold text-center text-gray-900">Sign in to your account</h2>
                 <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
@@ -47,7 +68,6 @@ export default function LoginPage() {
                             id="email"
                             name="email"
                             type="email"
-                            autoComplete="email"
                             required
                             value={form.email}
                             onChange={handleChange}
@@ -62,7 +82,6 @@ export default function LoginPage() {
                             id="password"
                             name="password"
                             type="password"
-                            autoComplete="current-password"
                             required
                             value={form.password}
                             onChange={handleChange}
