@@ -41,7 +41,7 @@ export default function UploadForm() {
       if (error.response) {
         setMessage(`Upload failed: ${error.response.data.detail || error.response.statusText}`);
       } else if (error.request) {
-        setMessage('Upload failed: No response from server. Is FastAPI running?');
+        setMessage('Upload failed: No response from server.');
       } else {
         setMessage(`Upload failed: ${error.message}`);
       }
@@ -55,15 +55,17 @@ export default function UploadForm() {
   };
 
   return (
-    <div className="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg mt-10">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Upload Resumes</h2>
+    <div className="max-w-xl mx-auto bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 p-8 rounded-2xl shadow-lg my-12 animate-fade-in transition-colors">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-blue-600 dark:text-blue-400 mb-6">
+        Upload Resumes
+      </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="files" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="files" className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-2">
             Select Resume Files
           </label>
-          <div className="relative border border-dashed border-blue-300 rounded-md p-4 text-center bg-blue-50 hover:bg-blue-100 transition">
+          <div className="relative border-2 border-dashed border-blue-300 dark:border-blue-500 rounded-xl p-6 text-center bg-blue-50 dark:bg-neutral-800 hover:bg-blue-100 dark:hover:bg-neutral-700 transition-colors cursor-pointer">
             <input
               type="file"
               id="files"
@@ -73,10 +75,10 @@ export default function UploadForm() {
               onChange={handleFileChange}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             />
-            <CloudArrowUpIcon className="h-8 w-8 text-blue-500 mx-auto mb-2" />
-            <p className="text-sm text-gray-600">
+            <CloudArrowUpIcon className="h-10 w-10 text-blue-500 dark:text-blue-400 mx-auto mb-3" />
+            <p className="text-sm text-gray-600 dark:text-neutral-400">
               Click or drag files here to upload<br />
-              <span className="text-xs text-gray-400">Accepted: .pdf, .doc, .docx</span>
+              <span className="text-xs text-gray-400 dark:text-neutral-500">Accepted: .pdf, .doc, .docx</span>
             </p>
           </div>
         </div>
@@ -84,7 +86,7 @@ export default function UploadForm() {
         <button
           type="submit"
           disabled={loading || !selectedFiles || selectedFiles.length === 0}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition disabled:bg-blue-300 disabled:cursor-not-allowed flex justify-center items-center"
+          className="w-full px-4 py-2 rounded-full bg-blue-600 dark:bg-blue-500 text-white font-semibold shadow hover:scale-105 hover:bg-blue-700 dark:hover:bg-blue-600 transition-transform duration-300 disabled:opacity-50 flex justify-center items-center"
         >
           {loading ? (
             <>
@@ -121,7 +123,7 @@ export default function UploadForm() {
         <p
           className={`mt-6 text-center text-sm font-medium ${
             message.toLowerCase().includes('success')
-              ? 'text-green-600'
+              ? 'text-emerald-600'
               : 'text-red-600'
           }`}
         >

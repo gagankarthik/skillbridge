@@ -6,82 +6,97 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 
 const SignupPage: React.FC = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
-    const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const router = useRouter();
 
-    const handleSignup = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        setError('');
-        try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            router.push('/dashboard'); // Navigate after successful signup
-        } catch (err: any) {
-            setError(err?.message || 'Signup failed. Please try again.');
-            console.error('Signup error:', err);
-        } finally {
-            setLoading(false);
-        }
-    };
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      router.push('/dashboard');
+    } catch (err: any) {
+      console.error('Signup error:', err);
+      setError(err?.message || 'Signup failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-white to-purple-100 px-4">
-            <form
-                onSubmit={handleSignup}
-                className="bg-white/90 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-blue-100 backdrop-blur-md"
-            >
-                <div className="flex flex-col items-center mb-6">
-                    <h2 className="text-3xl font-extrabold text-blue-700 mb-1">Create Account</h2>
-                    <p className="text-gray-500 text-sm">Join SkillBridge today!</p>
-                </div>
-                {error && (
-                    <div className="mb-4 text-red-600 text-center bg-red-50 rounded py-2 px-3">{error}</div>
-                )}
-                <div className="mb-4">
-                    <label className="block mb-2 text-sm font-semibold text-gray-700">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-                        placeholder="Enter your email"
-                    />
-                </div>
-                <div className="mb-6">
-                    <label className="block mb-2 text-sm font-semibold text-gray-700">
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-                        placeholder="Enter your password"
-                    />
-                </div>
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-600 transition-colors disabled:opacity-50 shadow-lg"
-                >
-                    {loading ? 'Signing up...' : 'Sign Up'}
-                </button>
-                <div className="mt-6 text-center text-sm text-gray-600">
-                    Already have an account?{' '}
-                    <a href="/login" className="text-blue-600 hover:underline font-medium">
-                        Log in
-                    </a>
-                </div>
-            </form>
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-50 dark:from-neutral-900 to-white dark:to-neutral-950 transition-colors px-4">
+      <form
+        onSubmit={handleSignup}
+        className="w-full max-w-md bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-2xl shadow-lg p-8 space-y-6 animate-slide-up backdrop-blur"
+      >
+        <div className="text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2 animate-fade-in">
+            Create Account
+          </h2>
+          <p className="text-gray-600 dark:text-neutral-400 text-sm animate-fade-in delay-100">
+            Join SkillBridge today!
+          </p>
         </div>
-    );
+
+        {error && (
+          <div className="bg-red-50 dark:bg-red-900 text-red-600 dark:text-red-300 border border-red-200 dark:border-red-800 rounded-lg px-4 py-2 text-sm text-center animate-fade-in">
+            {error}
+          </div>
+        )}
+
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-gray-900 dark:text-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition"
+              placeholder="you@email.com"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-neutral-300 mb-1">
+              Password
+            </label>
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-gray-900 dark:text-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition"
+              placeholder="Enter your password"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full px-4 py-2 rounded-full bg-blue-600 dark:bg-blue-500 text-white font-semibold shadow hover:scale-105 hover:bg-blue-700 dark:hover:bg-blue-600 transition-transform duration-300 disabled:opacity-50"
+        >
+          {loading ? 'Signing up...' : 'Sign Up'}
+        </button>
+
+        <div className="text-center text-sm text-gray-600 dark:text-neutral-400">
+          Already have an account?{' '}
+          <a
+            href="/login"
+            className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
+          >
+            Log in
+          </a>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 export default SignupPage;
