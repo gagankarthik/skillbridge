@@ -65,7 +65,9 @@ export default function TopNavbar() {
         <div className="flex h-16 justify-between items-center">
           {/* Left - Logo & Links */}
           <div className="flex items-center">
-            <span className="text-xl font-bold text-gray-900 mr-8">SkillBridge</span>
+            <span className="text-xl font-bold text-gray-900 mr-8">
+              <img src="/logo.svg" alt="Logo" className="h-8 w-auto inline-block" />
+            </span>
             <div className="hidden md:flex space-x-4">
               {navigation.map((item) => (
                 <Link

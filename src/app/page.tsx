@@ -8,8 +8,8 @@ export default function HomePage() {
   return (
     <div className="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 min-h-screen flex flex-col">
       {/* NAVBAR */}
-      <header className="fixed top-0 w-full bg-white/90 dark:bg-neutral-900/90 backdrop-blur border-b border-gray-200 dark:border-neutral-800 z-50">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-4">
+      <header className="fixed top-0 w-full bg-transparent shadow-sm backdrop-blur border-b border-gray-200 dark:border-neutral-800 z-50">
+        <div className="max-w-6xl mx-auto flex justify-between items-center px-4 py-4">
           <div className="flex items-center gap-2">
            <img
               src="/logo.svg"
@@ -220,8 +220,8 @@ export default function HomePage() {
     
 
       {/*CTA*/}
-      <section className="bg-neutral-50 dark:bg-neutral-900 py-16 px-4">
-  <div className="layout-grid-bg max-w-5xl mx-auto px-8 py-16 text-center relative rounded-2xl shadow-lg overflow-hidden">
+      <section className="bg-transparent py-16 px-4">
+  <div className="layout-grid-bg  backdrop-blur max-w-5xl mx-auto px-8 py-16 text-center relative rounded-2xl shadow-lg overflow-hidden">
     <h2 className="text-5xl font-bold mb-4">Start looking for best talent</h2>
     <p className="mb-8 text-neutral-700 dark:text-neutral-300">
       Join SkillBridge today and experience a new way to hire top talent.
