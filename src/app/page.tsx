@@ -6,30 +6,37 @@ export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="bg-white dark:bg-neutral-950 text-gray-800 dark:text-neutral-200 transition-colors min-h-screen flex flex-col">
+    <div className="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 min-h-screen flex flex-col">
       {/* NAVBAR */}
-      <header className="fixed top-0 w-full bg-white/80 dark:bg-neutral-900/80 backdrop-blur border-b border-gray-200 dark:border-neutral-800 z-50 transition-all">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-6 py-4">
-          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">SkillBridge</div>
+      <header className="fixed top-0 w-full bg-white/90 dark:bg-neutral-900/90 backdrop-blur border-b border-gray-200 dark:border-neutral-800 z-50">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-4">
+          <div className="flex items-center gap-2">
+           <img
+              src="/logo.svg"
+              alt="SkillBridge Logo"
+              className="h-8 w-auto"
+              loading="lazy"
+            />
+          </div>
           <nav className="hidden md:flex items-center gap-6">
-            {["#features", "#use-cases", "#contact"].map(link => (
+            {["#features", "#use-cases", "#contact"].map((link) => (
               <a
                 key={link}
                 href={link}
-                className="text-gray-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition text-sm font-medium"
+                className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition"
               >
                 {link.replace("#", "").replace("-", " ").toUpperCase()}
               </a>
             ))}
             <a
               href="/login"
-              className="px-4 py-2 rounded-full border border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900 transition text-sm font-medium"
+              className="text-sm font-medium border border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full hover:bg-blue-50 dark:hover:bg-neutral-800 transition"
             >
               Log In
             </a>
             <a
               href="/signup"
-              className="px-4 py-2 rounded-full bg-blue-600 dark:bg-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-600 transition text-sm font-medium"
+              className="text-sm font-medium bg-blue-600 dark:bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-700 dark:hover:bg-blue-600 transition"
             >
               Get Started
             </a>
@@ -57,25 +64,25 @@ export default function HomePage() {
         {mobileMenuOpen && (
           <div className="md:hidden bg-white dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800 shadow-sm">
             <div className="flex flex-col px-4 py-2 space-y-1">
-              {["#features", "#use-cases", "#contact"].map(link => (
+              {["#features", "#use-cases", "#contact"].map((link) => (
                 <a
                   key={link}
                   href={link}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-gray-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition text-sm font-medium"
+                  className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition"
                 >
                   {link.replace("#", "").replace("-", " ").toUpperCase()}
                 </a>
               ))}
               <a
                 href="/login"
-                className="px-4 py-2 rounded-full border border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 text-center mt-2"
+                className="text-center mt-2 text-sm font-medium border border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full"
               >
                 Log In
               </a>
               <a
                 href="/signup"
-                className="px-4 py-2 rounded-full bg-blue-600 dark:bg-blue-500 text-white text-center mt-2"
+                className="text-center mt-2 text-sm font-medium bg-blue-600 dark:bg-blue-500 text-white px-4 py-2 rounded-full"
               >
                 Get Started
               </a>
@@ -85,134 +92,176 @@ export default function HomePage() {
       </header>
 
       {/* MAIN */}
-      <main className="flex-1 pt-24">
+      <main className="flex-1">
         {/* HERO */}
-        <section className="px-4 md:px-6 py-24 text-center bg-gradient-to-b from-blue-50 dark:from-neutral-900 to-white dark:to-neutral-950 transition-colors">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight animate-fade-in">
-            Bridge the Skill Gap with <span className="text-blue-600 dark:text-blue-400">SkillBridge</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-600 dark:text-neutral-400 mb-8 animate-fade-in delay-100">
-            Empower yourself or your team with tailored learning paths, real-world projects, and expert mentorship.
-          </p>
-          <a
-            href="#get-started"
-            className="inline-block px-6 py-3 bg-blue-600 dark:bg-blue-500 text-white rounded-full font-semibold shadow hover:scale-105 hover:bg-blue-700 dark:hover:bg-blue-600 transition-transform duration-300 animate-slide-up"
-          >
-            Get Started
-          </a>
+        <section className="hero-grid-bg px-4 py-20 md:py-28 text-center relative overflow-hidden ">
+          <div className="max-w-3xl mx-auto pt-12">
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-4">
+              Find the <span className="text-blue-600 dark:text-blue-400">best people</span> for <br /> your company
+            </h1>
+            <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 mb-8">
+              Maximize conversions with the right talent. Discover highly skilled, vetted candidates.
+            </p>
+            <a
+              href="/signup"
+              className="inline-block px-6 py-3 rounded-full bg-blue-600 dark:bg-blue-500 text-white font-semibold shadow hover:bg-blue-700 dark:hover:bg-blue-600 transition"
+            >
+              Get Started
+            </a>
+          </div>
         </section>
 
+     
+
         {/* FEATURES */}
-        <section id="features" className="py-16 bg-white dark:bg-neutral-950 transition-colors">
-          <div className="max-w-6xl mx-auto px-4 md:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 dark:text-white animate-fade-in">
-              Why Choose <span className="text-blue-600 dark:text-blue-400">SkillBridge?</span>
+        <section id="features" className="bg-white dark:bg-neutral-950 py-16 px-4">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              Leverage global world-class talented people
             </h2>
-            <div className="grid gap-8 md:grid-cols-3">
-              {[
-                { title: "Personalized Learning", desc: "Adaptive courses tailored to your goals and skill level." },
-                { title: "Real-World Projects", desc: "Hands-on projects to build your portfolio and confidence." },
-                { title: "Expert Mentorship", desc: "Connect with industry experts for guidance and feedback." }
-              ].map((item, idx) => (
-                <div key={idx} className="bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 p-8 rounded-2xl shadow hover:shadow-lg transition duration-300 animate-slide-up">
-                  <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-2">{item.title}</h3>
-                  <p className="text-gray-700 dark:text-neutral-300">{item.desc}</p>
-                </div>
-              ))}
+            <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+              <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-2xl p-6 shadow hover:shadow-lg transition">
+                <img src="raising.gif" alt="Raising" className="w-12 h-12 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Vetted Professionals</h3>
+                <p className="text-neutral-600 dark:text-neutral-400">
+                  Access a pool of highly skilled, vetted professionals ready to contribute to your projects.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-2xl p-6 shadow hover:shadow-lg transition">
+                <img src="globe.gif" alt="Global" className="w-12 h-12 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Global Talent</h3>
+                <p className="text-neutral-600 dark:text-neutral-400">
+                  Tap into a diverse talent pool from around the world, bringing unique perspectives and skills to your projects.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-2xl p-6 shadow hover:shadow-lg transition">
+                <img src="top.gif" alt="Top 0.1% Talent" className="w-12 h-12 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Top 0.1% Talent</h3>
+                <p className="text-neutral-600 dark:text-neutral-400">
+                  We test and vet the best so you don't have to.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
         {/* USE CASES */}
-        <section id="use-cases" className="py-16 bg-blue-50 dark:bg-neutral-900 transition-colors">
-          <div className="max-w-6xl mx-auto px-4 md:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 dark:text-white animate-fade-in">
-              Unlock Your Potential with SkillBridge
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <img
-                src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80"
-                alt="Learning"
-                className="rounded-2xl shadow w-full object-cover animate-fade-in"
-              />
-              <div className="animate-slide-up">
-                <h3 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-3">
-                  A Platform Built for Growth
-                </h3>
-                <p className="text-gray-700 dark:text-neutral-300 mb-4">
-                  Whether you're a student, professional, or organization, our platform adapts to your needs.
-                </p>
-                <ul className="list-disc list-inside text-gray-600 dark:text-neutral-400 space-y-2">
-                  <li>Curated learning paths for every industry</li>
-                  <li>Interactive lessons and real-world challenges</li>
-                  <li>Progress tracking and personalized recommendations</li>
-                  <li>Community support and expert guidance</li>
-                </ul>
-              </div>
+        <section id="use-cases" className="bg-blue-50 dark:bg-neutral-900 py-16 px-4">
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold">
+                The all-in-one hiring platform
+              </h2>
+              <p className="text-neutral-700 dark:text-neutral-300">
+                Find the best match for your company. Built for speed, quality, and cost efficiency.
+              </p>
+              <ul className="space-y-2 text-neutral-600 dark:text-neutral-400">
+                <li>✔️ Vetted professionals for key roles</li>
+                <li>✔️ Transparent pricing</li>
+                <li>✔️ Fast, reliable hiring process</li>
+                <li>✔️ Web and mobile friendly</li>
+              </ul>
+              <a
+                href="/signup"
+                className="inline-block mt-4 px-6 py-3 rounded-full bg-blue-600 dark:bg-blue-500 text-white font-semibold shadow hover:bg-blue-700 dark:hover:bg-blue-600 transition"
+              >
+                Learn More
+              </a>
             </div>
+            <img
+              src="hiring.svg"
+              alt="Hiring platform"
+              className="rounded-2xl w-full object-cover"
+            />
           </div>
         </section>
 
         {/* CONTACT */}
-        <section id="contact" className="py-16 bg-white dark:bg-neutral-950 transition-colors">
-          <div className="max-w-3xl mx-auto px-4 md:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-900 dark:text-white animate-fade-in">
-              Contact Us
-            </h2>
+        <section id="contact" className="bg-white dark:bg-neutral-950 py-16 px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Get in touch</h2>
+            <p className="mb-8 text-neutral-700 dark:text-neutral-300">
+              Have questions or need help? We're here to support your hiring journey.
+            </p>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 alert("Thank you for contacting SkillBridge!");
               }}
-              className="bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-2xl shadow p-8 space-y-6 animate-slide-up"
+              className="bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-2xl shadow p-8 space-y-6"
             >
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-gray-700 dark:text-neutral-300 font-medium mb-1">Name</label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-neutral-700 rounded-lg focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition bg-white dark:bg-neutral-900 text-gray-900 dark:text-white"
-                    placeholder="Your Name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 dark:text-neutral-300 font-medium mb-1">Email</label>
-                  <input
-                    type="email"
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-neutral-700 rounded-lg focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition bg-white dark:bg-neutral-900 text-gray-900 dark:text-white"
-                    placeholder="you@email.com"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-gray-700 dark:text-neutral-300 font-medium mb-1">Message</label>
-                <textarea
-                  required
-                  rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-neutral-700 rounded-lg focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition bg-white dark:bg-neutral-900 text-gray-900 dark:text-white"
-                  placeholder="How can we help you?"
-                />
-              </div>
+              <input
+                type="text"
+                required
+                placeholder="Your Name"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:ring-2 focus:ring-blue-100 focus:border-blue-600 transition"
+              />
+              <input
+                type="email"
+                required
+                placeholder="you@email.com"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:ring-2 focus:ring-blue-100 focus:border-blue-600 transition"
+              />
+              <textarea
+                required
+                rows={4}
+                placeholder="How can we help you?"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:ring-2 focus:ring-blue-100 focus:border-blue-600 transition"
+              />
               <button
                 type="submit"
-                className="px-6 py-3 bg-blue-600 dark:bg-blue-500 text-white rounded-full font-semibold shadow hover:scale-105 hover:bg-blue-700 dark:hover:bg-blue-600 transition-transform duration-300"
+                className="w-full px-6 py-3 rounded-full bg-blue-600 dark:bg-blue-500 text-white font-semibold shadow hover:bg-blue-700 dark:hover:bg-blue-600 transition"
               >
                 Send Message
               </button>
             </form>
           </div>
         </section>
+    
+
+      {/*CTA*/}
+      <section className="bg-neutral-50 dark:bg-neutral-900 py-16 px-4">
+  <div className="layout-grid-bg max-w-5xl mx-auto px-8 py-16 text-center relative rounded-2xl shadow-lg overflow-hidden">
+    <h2 className="text-5xl font-bold mb-4">Start looking for best talent</h2>
+    <p className="mb-8 text-neutral-700 dark:text-neutral-300">
+      Join SkillBridge today and experience a new way to hire top talent.
+    </p>
+
+    <div className="flex flex-col items-center space-y-6 md:flex-row md:justify-center md:space-y-0 md:space-x-6">
+      <a
+        href="/signup"
+        className="px-6 py-3 mt-8 bg-blue-600 dark:bg-blue-500 text-white font-semibold rounded-full shadow hover:bg-blue-700 dark:hover:bg-blue-600 transition"
+      >
+        Get Started
+      </a>
+      
+      <img
+        src="arrowdown.gif"
+        alt="Arrow pointing to Get Started"
+        className="w-12 h-12"
+      />
+
+      
+    </div>
+  </div>
+</section>
+
       </main>
 
       {/* FOOTER */}
-      <footer className="bg-neutral-900 text-neutral-300 py-10 mt-8 transition-colors">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 grid gap-8 md:grid-cols-3">
+      <footer className="py-10 mt-8 bg-gradient-to-r from-blue-100 to-blue-200">
+        <div className="max-w-6xl mx-auto px-4 grid gap-8 md:grid-cols-3">
           <div>
-            <div className="text-xl font-extrabold text-blue-400 mb-1">SkillBridge</div>
-            <p className="text-sm text-neutral-400">
-              Empowering learners and teams to bridge the skill gap with personalized learning and real-world experience.
+            <div className="text-xl font-extrabold text-blue-400 mb-1">
+              <img
+                src="/logo.svg"
+                alt="SkillBridge Logo"
+                className="h-8 w-auto"
+                loading="lazy"
+              />
+            </div>
+            <p className="text-md text-neutral-400 pt-5">
+              Empowering companies to hire top talent quickly, easily, and affordably.
             </p>
           </div>
           <div>
@@ -233,7 +282,7 @@ export default function HomePage() {
             </ul>
           </div>
         </div>
-        <div className="border-t border-neutral-800 mt-8 pt-4 text-center text-sm text-neutral-500">
+        <div className="border-t border-neutral-800 mt-8 pt-4 text-center text-sm text-neutral-500 mx-8">
           &copy; {new Date().getFullYear()} SkillBridge. All rights reserved.
         </div>
       </footer>
