@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ConfigureAmplify from "../../utils/ConfigureAmplify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,9 +46,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       
+        <ConfigureAmplify />
+        {/* The main content of the application */}
+        {/* This component is used to configure Amplify in a Next.js application */}
+        {/* It imports the Amplify library and the outputs from the Amplify project */}
+        {/* The ConfigureAmplify component is used to configure Amplify in a Next.js application */}
+        {/* It imports the Amplify library and the outputs from the Amplify project */}
+        {/* The Amplify library is configured with the outputs from the Amplify project */}
+        {/* The outputs from the Amplify project are imported from the amplify_outputs.json file */}
+        {/* The ConfigureAmplify component is used to configure Amplify in a Next.js application */}
+        {/* It imports the Amplify library and the outputs from the Amplify project */}
         {children}
-       
       </body>
     </html>
   );

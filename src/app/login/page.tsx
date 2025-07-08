@@ -2,8 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
+import { Auth } from 'aws-amplify';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -18,26 +17,21 @@ const LoginPage: React.FC = () => {
     setError('');
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log('Login successful:', userCredential.user);
+      await Auth.signIn(email, password);
+      console.log('Login successful');
       router.push('/dashboard');
     } catch (err: any) {
       console.error('Login error:', err);
-      switch (err.code) {
-        case 'auth/invalid-email':
-          setError('Invalid email address.');
-          break;
-        case 'auth/user-not-found':
-          setError('No user found with this email.');
-          break;
-        case 'auth/wrong-password':
-          setError('Incorrect password.');
-          break;
-        case 'auth/too-many-requests':
-          setError('Too many login attempts. Please try again later.');
-          break;
-        default:
-          setError(err.message || 'Login failed. Please try again.');
+      if (err.code === 'UserNotFoundException') {
+        setError('No user found with this email.');
+      } else if (err.code === 'NotAuthorizedException') {
+        setError('Incorrect password.');
+      } else if (err.code === 'UserNotConfirmedException') {
+        setError('Account not confirmed. Please check your email.');
+      } else if (err.code === 'TooManyFailedAttemptsException' || err.code === 'TooManyRequestsException') {
+        setError('Too many login attempts. Please try again later.');
+      } else {
+        setError(err.message || 'Login failed. Please try again.');
       }
     } finally {
       setLoading(false);
