@@ -10,8 +10,6 @@ import {
   Cog6ToothIcon as SettingsIcon,
   ArrowLeftStartOnRectangleIcon as LogoutIcon,
 } from '@heroicons/react/24/outline';
-import { auth } from '@/lib/firebase'; // adjust this path
-import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 export default function TopNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -26,38 +24,6 @@ export default function TopNavbar() {
     { name: 'New Resumes', href: '/upload' },
   ];
 
-  // Listen for auth changes
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUserEmail(user?.email || null);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  // Close card when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        userIconRef.current &&
-        !userIconRef.current.contains(event.target as Node)
-      ) {
-        setShowUserCard(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      router.push('/'); // redirect to landing page
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
 
   return (
     <nav className="bg-white border-b border-gray-200 z-50 relative">

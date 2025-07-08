@@ -1,16 +1,12 @@
-"use client"
-import React, { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { AuthUser } from 'aws-amplify/auth'
+import Signup from '@/components/Signup'
+import React from 'react'
 
-const Signup = ({user}: {user: AuthUser}) => {
-  const router = useRouter()
-  useEffect(() => {
-    if (user) {
-      router.push(`/dashboard`)
-    }
-  }, [user, router])
-  return  null
+const SignupPage = () => {
+  return (
+    <div>
+      <Signup/>
+    </div>
+  )
 }
 
-export default Signup
+export default SignupPage
