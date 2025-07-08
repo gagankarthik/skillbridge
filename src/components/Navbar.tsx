@@ -32,7 +32,6 @@ export default function TopNavbar() {
   useEffect(() => {
   const fetchUser = async () => {
     try {
-      const user = await getCurrentUser();
       const userAttributes = await fetchUserAttributes();
       setUserName(userAttributes.email || null);
     } catch (error) {
