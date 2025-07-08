@@ -10,6 +10,7 @@ import {
   Cog6ToothIcon as SettingsIcon,
   ArrowLeftStartOnRectangleIcon as LogoutIcon,
 } from '@heroicons/react/24/outline';
+import { signOut } from 'aws-amplify/auth';
 
 export default function TopNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -73,7 +74,10 @@ export default function TopNavbar() {
                       Settings
                     </Link>
                     <button
-                      onClick={handleLogout}
+                      onClick={async () => {
+                        await signOut();
+                        router.push('/');
+                      }}
                       className="text-left text-gray-700 hover:text-red-600 text-sm"
                     >
                       <LogoutIcon className="inline-block mr-2 h-4 w-4" />

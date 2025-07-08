@@ -28,12 +28,7 @@ export default function HomePage() {
                 {link.replace("#", "").replace("-", " ").toUpperCase()}
               </a>
             ))}
-            <a
-              href="/login"
-              className="text-sm font-medium border border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full hover:bg-blue-50 dark:hover:bg-neutral-800 transition"
-            >
-              Log In
-            </a>
+            
             <a
               href="/signup"
               className="text-sm font-medium bg-blue-600 dark:bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-700 dark:hover:bg-blue-600 transition"
@@ -74,12 +69,7 @@ export default function HomePage() {
                   {link.replace("#", "").replace("-", " ").toUpperCase()}
                 </a>
               ))}
-              <a
-                href="/login"
-                className="text-center mt-2 text-sm font-medium border border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full"
-              >
-                Log In
-              </a>
+           
               <a
                 href="/signup"
                 className="text-center mt-2 text-sm font-medium bg-blue-600 dark:bg-blue-500 text-white px-4 py-2 rounded-full"
