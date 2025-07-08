@@ -11,11 +11,15 @@ import {
   ArrowLeftStartOnRectangleIcon as LogoutIcon,
 } from '@heroicons/react/24/outline';
 import { signOut } from 'aws-amplify/auth';
+import { getCurrentUser, fetchUserAttributes} from 'aws-amplify/auth';
 
 export default function TopNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showUserCard, setShowUserCard] = useState(false);
-  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
+
+ 
+  
   const userIconRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -24,6 +28,21 @@ export default function TopNavbar() {
     { name: 'Query', href: '/query' },
     { name: 'New Resumes', href: '/upload' },
   ];
+
+  useEffect(() => {
+  const fetchUser = async () => {
+    try {
+      const user = await getCurrentUser();
+      const userAttributes = await fetchUserAttributes();
+      setUserName(userAttributes.email || null);
+    } catch (error) {
+      console.error('No user found, redirecting to signup:', error);
+      router.push('/signup');
+    }
+  };
+  fetchUser();
+}, [router]);
+
 
 
   return (
@@ -61,8 +80,9 @@ export default function TopNavbar() {
               {/* Dropdown card */}
               {showUserCard && (
                 <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg border border-gray-200 z-50">
-                  <div className="py-3 px-4 border-b border-gray-100 text-sm text-gray-600">
-                    {userEmail ? `Signed in as ${userEmail}` : 'Not signed in'}
+                  <div className="py-2 px-4 border-b border-gray-200">
+                    <p className="text-sm text-gray-700">Signed in as:</p>
+                    <p className="text-sm font-medium text-gray-900">{userName || 'No User'}</p>
                   </div>
                   <div className="py-2 px-4 flex flex-col space-y-2">
                     <Link

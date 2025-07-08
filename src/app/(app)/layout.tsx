@@ -8,7 +8,9 @@ export default function AppLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Navbar />
-      <main className="container mx-auto p-4">{children}</main>
+      <main className="container mx-auto p-4">
+        {children}
+      </main>
     </>
   );
 }
